@@ -1,0 +1,39 @@
+body {
+    background-color: #0d1117; /* Dark background from Coolors */
+    color: #c9d1d9;           /* Light grey text for contrast */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Sans-serif for small text */
+    line-height: 1.6;
+    margin: 0 auto;           /* Centers the content block */
+    max-width: 950px;         /* Prevents stretching on wide monitors */
+    padding: 20px;
+}
+
+h1, h2 {
+    font-family: 'Georgia', serif; /* Stylized serif for headings */
+    color: #58a6ff;              /* Accent color */
+    border-bottom: 2px solid #30363d;
+}
+
+header, footer {
+    background-color: #161b22;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+nav a {
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+    color: #ffffff;
+}
+
+main {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
