@@ -45,7 +45,7 @@ header {
     text-align: center;
 }
 
-header h1 {
+h1 {
     font-weight: 300;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -70,7 +70,7 @@ nav {
 
 /* Targets all nav links inside header/footer */
 nav a {
-    color: var(--link-color) !important;
+    color: var(--link-color);
     text-decoration: none;
     font-size: 0.9rem;
     text-transform: uppercase;
@@ -81,7 +81,7 @@ nav a {
 
 nav a:hover {
     opacity: 1;
-    color: #ffffff !important;
+    color: #ffffff;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
@@ -150,7 +150,7 @@ hr {
     margin: 40px 0;
 }
 
-hr.divider {
+.divider {
     width: 60%;
     margin: 20px auto;
     opacity: 0.5;
@@ -177,11 +177,24 @@ footer nav {
 
 .crappy-link {
     font-family: 'Comic Sans MS', cursive;
-    color: #ff00ff !important;
+    color: #ff00ff;
     font-weight: bold;
-    opacity: 1 !important;
+    opacity: 1;
 }
 
 .crappy-link:hover {
     animation: shake 0.5s infinite;
+}
+
+.icon-small {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-right: 5px;
+}
+
+.accent-text {
+    color: var(--accent-color);
+    font-weight: bold;
 }
