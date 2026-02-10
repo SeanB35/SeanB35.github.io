@@ -3,7 +3,7 @@
 :root {
     --bg-color: #000000;
     --text-color: #ffffff;
-    --accent-color: #333333;
+    --accent-color: #a0a0a0;
     --highlight-color: #00ff00;
     /* Minimal tech accent */
     --link-color: #e0e0e0;
@@ -54,7 +54,7 @@ header h1 {
 }
 
 header p {
-    color: #888;
+    color: #a0a0a0;
     font-size: 0.9rem;
     margin-top: 0;
 }
@@ -137,7 +137,7 @@ figure {
 }
 
 figcaption {
-    color: #666;
+    color: #a0a0a0;
     font-size: 0.8rem;
     margin-top: 10px;
     font-style: italic;
@@ -163,7 +163,7 @@ footer {
     border-top: 1px solid var(--accent-color);
     padding-top: 20px;
     text-align: center;
-    color: #666;
+    color: #a0a0a0;
     font-size: 0.8rem;
     margin-bottom: 40px;
 }
@@ -185,4 +185,3 @@ footer nav {
 .crappy-link:hover {
     animation: shake 0.5s infinite;
 }
-
