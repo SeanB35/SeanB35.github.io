@@ -1,28 +1,42 @@
 body {
-    background-color: #0d1117; /* Dark background from Coolors */
-    color: #c9d1d9;           /* Light grey text for contrast */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Sans-serif for small text */
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    margin: 0 auto;           /* Centers the content block */
-    max-width: 950px;         /* Prevents stretching on wide monitors */
+    margin: 0 auto;
+    max-width: 950px;
     padding: 20px;
 }
 
-h1, h2 {
-    font-family: 'Georgia', serif; /* Stylized serif for headings */
-    color: #58a6ff;              /* Accent color */
+h1,
+h2 {
+    font-family: 'Georgia', serif;
+    color: #58a6ff;
     border-bottom: 2px solid #30363d;
 }
 
-header, footer {
+header,
+footer {
     background-color: #161b22;
     padding: 15px;
     text-align: center;
     border-radius: 8px;
 }
 
-nav a {
+a {
     color: #58a6ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+nav a {
+    color: #8abfff;
+    /* Lighter blue for better contrast on dark */
     text-decoration: none;
     font-weight: bold;
     margin: 0 10px;

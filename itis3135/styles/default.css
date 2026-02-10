@@ -1,41 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --accent-color: #333333;
+    --highlight-color: #00ff00;
+    /* Minimal tech accent */
+    --link-color: #e0e0e0;
+}
+
 body {
-    background-color: #f4f1ea; /* Warm parchment color */
-    color: #3e2723;           /* Dark brown text */
-    font-family: "Trebuchet MS", sans-serif;
-    margin: 0 auto;
-    max-width: 800px;         /* Different max-width than personal site */
-    padding: 40px;
-    border-left: 10px solid #795548; /* Visual accent */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
-h1 {
-    font-family: 'Times New Roman', serif;
-    font-size: 2.5rem;
-    color: #5d4037;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+/* Container for all content to keep it centered and sleek */
+.container {
+    max-width: 900px;
+    width: 90%;
+    margin: 40px auto;
 }
 
+header,
+main,
 footer {
-    margin-top: 50px;
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+}
+
+/* Sleek Header */
+header {
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+header h1 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+header p {
+    color: #888;
     font-size: 0.9rem;
-    border-top: 1px dashed #795548;
-    text-align: left; /* Different alignment than personal */
+    margin-top: 0;
 }
 
+/* Navigation - Minimalist */
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+/* Targets all nav links inside header/footer */
 nav a {
-    color: #d84315; /* Burnt orange */
-    padding: 5px;
+    color: var(--link-color) !important;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    opacity: 0.7;
 }
 
+nav a:hover {
+    opacity: 1;
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Content Area */
+main {
+    animation: fadeIn 1s ease-in-out;
+}
+
+h2,
+h3 {
+    font-weight: 300;
+    border-left: 2px solid #fff;
+    padding-left: 15px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+p,
+li {
+    color: #ccc;
+    font-weight: 300;
+}
+
+/* Links in text */
+main a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+    transition: border-color 0.3s;
+}
+
+main a:hover {
+    border-bottom: 1px solid #fff;
+}
+
+/* Images */
 img {
-    border: 5px solid #d7ccc8;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    filter: grayscale(100%);
+    /* Sleek B&W look */
+    transition: filter 0.5s ease;
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
 }
 
-blockquote {
-    font-style: italic;
-    background: #efebe9;
-    padding: 20px;
-    border-radius: 5px;
+img:hover {
+    filter: grayscale(0%);
+    /* Color on hover */
 }
+
+figure {
+    margin: 0;
+    text-align: center;
+}
+
+figcaption {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--accent-color);
+    margin: 40px 0;
+}
+
+hr.divider {
+    width: 60%;
+    margin: 20px auto;
+    opacity: 0.5;
+    height: 1px;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    border-top: 1px solid var(--accent-color);
+    padding-top: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 0.8rem;
+    margin-bottom: 40px;
+}
+
+footer nav {
+    margin-bottom: 15px;
+}
+
+
+
+
+.crappy-link {
+    font-family: 'Comic Sans MS', cursive;
+    color: #ff00ff !important;
+    font-weight: bold;
+    opacity: 1 !important;
+}
+
+.crappy-link:hover {
+    animation: shake 0.5s infinite;
+}
+
