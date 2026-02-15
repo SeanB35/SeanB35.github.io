@@ -33,7 +33,23 @@ a:hover {
     color: #ffffff;
     text-decoration: underline;
 }
-
+footer a {
+            color: #ffffff; /* Light cream for readability */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #58a6ff; /* Tangerine hover for feedback */
+            text-decoration: underline;
+        }
+        footer p, footer nav {
+            color: #ffffff; /* Grey for secondary text */
+        }
+        .icon-light {
+            fill: #ffffff;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
 nav a {
     color: #8abfff;
     /* Lighter blue for better contrast on dark */

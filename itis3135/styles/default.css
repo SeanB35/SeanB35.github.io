@@ -76,7 +76,7 @@ nav a {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s ease;
-    opacity: 0.7;
+    opacity: 1;
 }
 
 nav a:hover {
@@ -172,7 +172,31 @@ footer nav {
     margin-bottom: 15px;
 }
 
+footer a {
+    color: #ffffff;
+    /* Bright white for maximum visibility */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
 
+footer a:hover {
+    color: var(--highlight-color);
+    /* Neon green or accent on hover */
+    text-decoration: underline;
+    text-shadow: 0 0 8px var(--highlight-color);
+}
+
+footer p,
+footer nav {
+    color: #ADB6C4;
+    /* Grey for secondary text */
+}
+
+.icon-light {
+    fill: #FFEFD3;
+    vertical-align: middle;
+    margin-right: 4px;
+}
 
 
 .crappy-link {
