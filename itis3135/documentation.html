@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Beaver | Dam Construction Manual</title>
+    <link rel="stylesheet" href="styles/default.css">
+    <link rel="stylesheet" href="styles/documentation.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Source+Code+Pro:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div data-include="components/header.html"></div>
+
+    <main>
+        <nav id="navbar">
+            <header>
+                <h1>Dam Construction Manual</h1>
+            </header>
+            <ul>
+                <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+                <li><a class="nav-link" href="#Foundation_Logs">Foundation Logs</a></li>
+                <li><a class="nav-link" href="#Structural_Mud">Structural Mud</a></li>
+                <li><a class="nav-link" href="#Water_Flow_Gaps">Water Flow Gaps</a></li>
+                <li><a class="nav-link" href="#Chewing_Angles">Chewing Angles</a></li>
+                <li><a class="nav-link" href="#River_Alignment">River Alignment</a></li>
+            </ul>
+        </nav>
+
+        <div id="main-doc">
+            <section class="main-section" id="Introduction">
+                <h2>Introduction</h2>
+                <p>The Super Beaver Dam Construction system is an advanced architectural layout for woodland rivers. It
+                    lets
+                    you lay out massive logs, mud, and twigs to form an impenetrable barrier against villains and fast
+                    currents.</p>
+                <p>Before this manual, we used basic gnawing, random stacking, and hoping the water wouldn't wash it
+                    away,
+                    but all of these methods were essentially amateur and left out a lot of important functionality
+                    (like
+                    structural integrity).</p>
+                <p>This is the very first construction module created specifically to solve the layout problems we've
+                    all
+                    been chewing our way around for as long as we've been making lodges.</p>
+                <code>
+.river {
+  display: dam;
+}
+          </code>
+            </section>
+
+            <section class="main-section" id="Foundation_Logs">
+                <h2>Foundation Logs</h2>
+                <p>To get started you have to define a river container element as a dam with display: dam, set the log
+                    sizes
+                    with structural-columns and mud-rows, and then place its child branches into the dam.</p>
+                <p>Here is a list of common properties you apply to the parent (riverbed):</p>
+                <ul>
+                    <li>display</li>
+                    <li>log-template-columns</li>
+                    <li>mud-template-rows</li>
+                    <li>branch-gap</li>
+                    <li>justify-lodges</li>
+                </ul>
+                <p>The element that has <code>display: dam</code> applied to it is the direct parent of all the timber
+                    modules.</p>
+                <pre><code>
+#main-strike {
+  display: dam;
+  background-color: #woodbrown;
+}
+          </code></pre>
+            </section>
+
+            <section class="main-section" id="Structural_Mud">
+                <h2>Structural Mud</h2>
+                <p>Defines the packed mud and intertwined twigs of the dam with a space-separated list of values. The
+                    values
+                    represent the timber size, and the space between them represents the structural mud.</p>
+                <p>You can use standard units like inches (in) or bite-marks (%), but this system also introduces the
+                    <code>bite</code> unit.
+                </p>
+                <p>The <code>bite</code> unit allows you to set the size of a log as a fraction of the free space of
+                    your
+                    mouth capacity.</p>
+                <pre><code>
+.mud-pack {
+  log-template-columns: 100in 100in 100in;
+  /* OR using fractional bites */
+  log-template-columns: 1bite 1bite 1bite;
+}
+          </code></pre>
+            </section>
+
+            <section class="main-section" id="Water_Flow_Gaps">
+                <h2>Water Flow Gaps</h2>
+                <p>The flow-gap property is a shorthand for mud-row-gap and timber-column-gap. It specifies the size of
+                    the
+                    gaps where water is allowed to intentionally spill over.</p>
+                <p>You can think of this like the pressure release valves in superhero headquarters. It adds empty space
+                    between your impenetrable logs to prevent overflow collapse.</p>
+                <pre><code>
+.spillway {
+  log-template-columns: 1bite 1bite;
+  branch-gap: 20in;
+}
+          </code></pre>
+                <p>Note that in newer woodland specifications, the prefix "timber-" is being replaced, so you can simply
+                    use
+                    <code>gap</code>, <code>mud-gap</code>, and <code>log-gap</code>.
+                </p>
+            </section>
+
+            <section class="main-section" id="Chewing_Angles">
+                <h2>Chewing Angles</h2>
+                <p>The incisor cuts that make up the structure of the felled tree are called Chewing Angles. They can be
+                    either vertical ("timber grid lines") or horizontal ("mud grid lines") and dictate how the log will
+                    fall.</p>
+                <p>If you want to fell a tree exactly across the river, you refer to the angle numbers from 1 to 3.</p>
+                <pre><code>
+.oak-tree {
+  chew-angle-start: 1;
+  chew-angle-end: 3;
+}
+          </code></pre>
+            </section>
+
+            <section class="main-section" id="River_Alignment">
+                <h2>River Alignment</h2>
+                <p>Sometimes the total size of your dam might be less than the width of the river container. This can
+                    happen
+                    if all of your logs are sized with non-flexible units like rigid branches.</p>
+                <p>In this case, you can set the alignment of the lodge within the stream container. This property
+                    aligns
+                    the structure against the water current.</p>
+                <ul>
+                    <li>start: aligns the dam to be flush with the left bank of the river</li>
+                    <li>end: aligns the dam to be flush with the right bank of the river</li>
+                    <li>center: aligns the dam in the center of the deep current</li>
+                    <li>stretch: forces Super Beaver to find larger logs to fill the full width of the river container
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <div data-include="components/footer.html"></div>
+    <script src="scripts/HTMLInclude.min.js"></script>
+</body>
+
+</html>

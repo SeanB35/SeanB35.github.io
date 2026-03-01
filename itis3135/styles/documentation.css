@@ -1,0 +1,182 @@
+/* Color Variables for easy theming - SUPER BEAVER THEME */
+:root {
+    --primary-color: #f4a261;
+    /* Emblem Gold */
+    --bg-dark: #3e2723;
+    /* Deep wood brown */
+    --bg-darker: #2b1b17;
+    /* Darker bark */
+    --text-main: #f1faee;
+    /* Clean white */
+    --text-header: #f4a261;
+    /* Emblem Gold headers */
+    --code-bg: #8d6e63;
+    /* Lighter wood for code blocks */
+    --accent: #5dbcd2;
+    /* River water blue */
+    --nav-width: 280px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* --- Navigation Styling --- */
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--nav-width);
+    height: 100vh;
+    background-color: var(--bg-darker);
+    box-shadow: 4px 0 0 var(--primary-color);
+    overflow-y: auto;
+    /* Allows scrolling if menu is long */
+}
+
+#navbar header {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--text-header);
+    text-align: center;
+    padding: 20px 10px;
+    border-bottom: 2px solid var(--primary-color);
+    font-family: 'Source Code Pro', monospace;
+    /* Thematic tech font */
+}
+
+#navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#navbar li {
+    border-bottom: 1px solid #4e342e;
+    /* Light brown border */
+}
+
+.nav-link {
+    display: block;
+    padding: 15px 20px;
+    color: var(--text-main);
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    font-size: 1.1rem;
+}
+
+.nav-link:hover {
+    background-color: #4e342e;
+    /* Highlight wood color */
+    color: var(--accent);
+    padding-left: 25px;
+    /* Slight animation push */
+}
+
+/* --- Main Content Styling --- */
+#main-doc {
+    margin-left: var(--nav-width);
+    /* Push content to right of nav */
+    padding: 40px;
+    max-width: 900px;
+}
+
+.main-section {
+    margin-bottom: 50px;
+    border-bottom: 1px solid #5d4037;
+    padding-bottom: 20px;
+}
+
+.main-section header {
+    font-size: 2rem;
+    color: var(--text-header);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+p {
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+}
+
+ul {
+    margin-bottom: 20px;
+    padding-left: 40px;
+}
+
+li {
+    margin-bottom: 10px;
+    color: #e3f2fd;
+    /* Light water color for text readability */
+}
+
+/* --- Code Block Styling --- */
+code {
+    background-color: var(--code-bg);
+    color: #2b1b17;
+    /* Dark text for code on light wood */
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+pre {
+    background-color: var(--code-bg);
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+    border-left: 5px solid var(--accent);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: #2b1b17;
+    display: block;
+    /* Ensures formatting holds */
+    white-space: pre;
+}
+
+/* --- Media Query for Mobile Responsiveness --- */
+@media (max-width: 815px) {
+
+    /* Move Navbar to top */
+    #navbar {
+        position: relative;
+        /* Unfix it */
+        width: 100%;
+        height: auto;
+        border-right: none;
+        box-shadow: 0 4px 0 var(--primary-color);
+        box-sizing: border-box;
+    }
+
+    #navbar ul {
+        max-height: 200px;
+        /* Limit height */
+        overflow-y: scroll;
+        border-top: 1px solid #4e342e;
+    }
+
+    /* Reset main content margin */
+    #main-doc {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .main-section header {
+        font-size: 1.6rem;
+    }
+}

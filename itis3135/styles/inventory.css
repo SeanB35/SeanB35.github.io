@@ -1,0 +1,159 @@
+/* --- Base Styling (Personal Style) --- */
+body {
+    font-family: 'Montserrat', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e5ccae;
+    /* Wood background */
+    color: #3e2723;
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+    color: #3e2723;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0px #fff;
+}
+
+/* Fix header and footer contrast on light background */
+.site-header p,
+.site-header nav a,
+footer,
+footer p,
+footer a,
+.crappy-link {
+    color: #3e2723;
+}
+
+.site-header nav a:hover,
+footer a:hover {
+    color: #1a0f0d;
+    text-shadow: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 8px 25px rgba(62, 39, 35, 0.2), 0 0 0 4px #5c4033;
+    border-radius: 8px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+th,
+td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #d7ccc8;
+}
+
+th {
+    background-color: #5c4033;
+    color: #ffcc80;
+    /* Gold accent (brightened for contrast) */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+/* --- Required Test Selectors --- */
+
+/* Test 27: Display inline-block for all span elements */
+span {
+    display: inline-block;
+}
+
+/* Tests 21-26: Row attribute selectors with linear gradients */
+tr[class="read"] {
+    background-image: linear-gradient(to right, #ffffff, #e3f2fd);
+    /* River blue tint */
+}
+
+tr[class="to-read"] {
+    background-image: linear-gradient(to right, #ffffff, #fff3e0);
+    /* Gold/orange tint */
+}
+
+tr[class="in-progress"] {
+    background-image: linear-gradient(to right, #ffffff, #efebe9);
+    /* Mudy brown tint */
+}
+
+/* Tests 28-36: Descendant attribute selectors for Status spans */
+tr[class="to-read"] span[class="status"] {
+    border: 1px solid #b84600;
+    /* Darker Orange Red for contrast */
+    background-image: linear-gradient(to bottom, #ffeb3b, #ff9800);
+    border-radius: 4px;
+    color: #3e1500;
+    /* Darker Brown-Orange for contrast */
+    text-align: center;
+    line-height: 30px;
+}
+
+tr[class="read"] span[class="status"] {
+    border: 1px solid #0d47a1;
+    /* Darker Blue for contrast */
+    background-image: linear-gradient(to bottom, #bbdefb, #64b5f6);
+    border-radius: 4px;
+    color: #002171;
+    /* Darker Blue for contrast */
+    text-align: center;
+    line-height: 30px;
+}
+
+tr[class="in-progress"] span[class="status"] {
+    border: 1px solid #5d4037;
+    /* Wood brown */
+    background-image: linear-gradient(to bottom, #d7ccc8, #a1887f);
+    border-radius: 4px;
+    color: #1a0f0d;
+    text-align: center;
+    line-height: 30px;
+}
+
+/* Tests 37-40: Attribute selector for .status and classes starting with "rate" */
+span[class="status"],
+span[class^="rate"] {
+    height: 30px;
+    width: 100px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    /* Ensures padding doesn't stretch the fixed width */
+}
+
+/* Tests 41-47: Direct children attribute selector (The rating dots) */
+span[class^="rate"]>span {
+    box-shadow: 0 0 0 1px #8d6e63;
+    border-radius: 50%;
+    margin: 0 4px;
+    height: 15px;
+    width: 15px;
+    background-color: #d7ccc8;
+    /* Blank wood dot */
+    vertical-align: middle;
+    /* Centers dots vertically */
+    box-sizing: border-box;
+}
+
+/* Tests 48-49: First descendant of class containing "one" */
+/* Note: Using ~= searches for a whole word within a space-separated class list */
+span[class~="one"] span:first-child {
+    background-image: linear-gradient(to bottom, #ffd54f, #ffb300);
+    /* Gold star */
+}
+
+/* Tests 50-51: First two descendants of class containing "two" */
+span[class~="two"] span:nth-child(-n+2) {
+    background-image: linear-gradient(to bottom, #ffd54f, #ffb300);
+}
+
+/* Tests 52-53: All descendants of class containing "three" */
+span[class~="three"] span {
+    background-image: linear-gradient(to bottom, #ffd54f, #ffb300);
+}

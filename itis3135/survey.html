@@ -1,21 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Beaver | Survey</title>
     <link rel="stylesheet" href="styles/default.css">
+    <link rel="stylesheet" href="styles/survey.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
     <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div data-include="components/header.html"></div>
 
     <main>
-        <h2>Survey</h2>
-        <p>This page is under construction. It will eventually house the Survey activity.</p>
+        <div class="container">
+            <header class="header">
+                <h1 id="title" class="text-center">Woodland Sidekick Squad Application</h1>
+                <p id="description" class="description text-center">
+                    Join Super Beaver in the fight for woodland justice and epic dam construction!
+                </p>
+            </header>
+            <form id="survey-form">
+                <div class="form-group">
+                    <label id="name-label" for="name">Hero Name (or Real Name)</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter your heroic name"
+                        required="">
+                </div>
+
+                <div class="form-group">
+                    <label id="email-label" for="email">Secret Email</label>
+                    <input type="email" name="email" id="email" class="form-control"
+                        placeholder="Enter your secret communications email" required="">
+                </div>
+
+                <div class="form-group">
+                    <label id="number-label" for="number">Years Foraging <span class="clue">(optional)</span></label>
+                    <input type="number" name="age" id="number" min="0" max="99" class="form-control"
+                        placeholder="Years">
+                </div>
+
+                <div class="form-group">
+                    <p>Which option best describes your current role in the forest?</p>
+                    <select id="dropdown" name="role" class="form-control" required="">
+                        <option disabled="" selected="" value="">Select current woodland role</option>
+                        <option value="student">Apprentice Lodge Builder</option>
+                        <option value="job">Full-time River Patrol</option>
+                        <option value="learner">Gatherer in Training</option>
+                        <option value="preferNo">Secret Civilian Identity</option>
+                        <option value="other">Other Woodland Creature</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <p>Are you willing to face danger alongside Super Beaver?</p>
+                    <label>
+                        <input name="user-recommend" value="definitely" type="radio" class="input-radio"
+                            checked="">Definitely! To the river!
+                    </label>
+                    <label>
+                        <input name="user-recommend" value="maybe" type="radio" class="input-radio">Maybe, if I get a
+                        cape.
+                    </label>
+                    <label>
+                        <input name="user-recommend" value="not-sure" type="radio" class="input-radio">Not sure, I
+                        prefer chewing bark.
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <p>What is your favorite Super Beaver superpower?</p>
+                    <select id="most-like" name="mostLike" class="form-control" required="">
+                        <option disabled="" selected="" value="">Select a superpower</option>
+                        <option value="challenges">Titanium Chompers</option>
+                        <option value="projects">Sonic Tail Slap</option>
+                        <option value="community">Hydro-Dynamic Swimming</option>
+                        <option value="openSource">Incredible Wood-Sensing Instincts</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <p>
+                        Which training modules would you like to enroll in?
+                        <span class="clue">(Check all that apply)</span>
+                    </p>
+                    <label><input name="prefer" value="front-end-projects" type="checkbox"
+                            class="input-checkbox">Advanced Dam Engineering</label>
+                    <label><input name="prefer" value="back-end-projects" type="checkbox" class="input-checkbox">River
+                        Navigation Tactics</label>
+                    <label><input name="prefer" value="data-visualization" type="checkbox"
+                            class="input-checkbox">Predator Evasion (Wolves & Bears)</label>
+                    <label><input name="prefer" value="challenges" type="checkbox" class="input-checkbox">Underwater
+                        Breath Holding</label>
+                    <label><input name="prefer" value="open-source-community" type="checkbox"
+                            class="input-checkbox">Cape Maintenance & Ironing</label>
+                    <label><input name="prefer" value="gitter-help-rooms" type="checkbox" class="input-checkbox">Log
+                        Identification (Oak vs. Pine)</label>
+                    <label><input name="prefer" value="videos" type="checkbox" class="input-checkbox">Patrol
+                        Communications</label>
+                    <label><input name="prefer" value="city-meetups" type="checkbox" class="input-checkbox">Emergency
+                        Mud Packing</label>
+                    <label><input name="prefer" value="wiki" type="checkbox" class="input-checkbox">Night Vision
+                        Exercises</label>
+                    <label><input name="prefer" value="forum" type="checkbox" class="input-checkbox">Super-Snack
+                        Foraging</label>
+                    <label><input name="prefer" value="additional-courses" type="checkbox"
+                            class="input-checkbox">Superhero Landings</label>
+                </div>
+
+                <div class="form-group">
+                    <p>Any additional heroic remarks or battle cries?</p>
+                    <textarea id="comments" class="input-textarea" name="comment"
+                        placeholder="Enter your battle cry here..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" id="submit" class="submit-button">
+                        Submit Application
+                    </button>
+                </div>
+            </form>
+        </div>
     </main>
 
     <div data-include="components/footer.html"></div>
     <script src="scripts/HTMLInclude.min.js"></script>
 </body>
+
 </html>

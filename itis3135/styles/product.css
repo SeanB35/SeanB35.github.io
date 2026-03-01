@@ -1,0 +1,258 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #2b1b17;
+    line-height: 1.6;
+    background-color: #f0e6d2;
+}
+
+/* --- Header & Navigation (Flexbox) --- */
+#header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: #3b2f2f;
+    box-shadow: inset 0 -4px 0 #ff4d4d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+#header-img {
+    height: 45px;
+    width: auto;
+    margin-right: 15px;
+    filter: sepia(100%) hue-rotate(350deg) saturate(300%) brightness(80%);
+}
+
+.brand-name {
+    color: #f4a261;
+    font-size: 1.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-link {
+    color: #f1faee;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ff4d4d;
+}
+
+/* Fix shared header visibility on light background */
+.site-header .site-title,
+.site-header p,
+.site-header nav a {
+    color: #3b2f2f;
+}
+
+.site-header nav a {
+    font-weight: 600;
+}
+
+.site-header nav a:hover {
+    color: #ff4d4d;
+    text-shadow: none;
+}
+
+.section {
+    padding: 80px 20px;
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    color: #3b2f2f;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Features Grid (Flexbox) --- */
+/* .features-grid {
+    display: flex;
+    justify-content: space-between;
+} */
+
+.feature {
+    flex: 1;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    border-top: 6px solid #f4a261;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-right: 30px;
+}
+
+.feature:last-child {
+    margin-right: 0;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+}
+
+.feature-heading {
+    color: #1a0b08;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+/* --- Video Section --- */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 4px #3b2f2f;
+    background-color: #000;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Form Section --- */
+.form-section {
+    background-color: #3b2f2f;
+    color: #f1faee;
+    border-radius: 12px;
+    margin-bottom: 60px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border: 4px solid #ff4d4d;
+}
+
+.form-heading {
+    color: #f4a261;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 30px auto 0;
+}
+
+#email {
+    align-self: stretch;
+    padding: 15px;
+    font-size: 1rem;
+    outline: 2px solid #ccc;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-family: inherit;
+}
+
+#email:focus {
+    outline: 2px solid #ff4d4d;
+    outline-offset: 2px;
+}
+
+#submit {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    align-self: stretch;
+    text-transform: uppercase;
+}
+
+#submit:hover {
+    background-color: #c32733;
+}
+
+#submit:active {
+    transform: scale(0.98);
+}
+
+/* --- Footer --- */
+footer {
+    background-color: #3b2f2f;
+    color: #f4a261;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    border-top: 2px solid #ff4d4d;
+}
+
+/* --- Media Query for Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    #header {
+        flex-direction: column;
+        padding: 15px;
+        height: auto;
+        position: relative;
+    }
+
+    .nav-links {
+        margin-top: 15px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links li {
+        margin-left: 0;
+        margin-bottom: 15px;
+    }
+
+    .nav-links li:last-child {
+        margin-bottom: 0;
+    }
+
+    /* .features-grid {
+        flex-direction: column;
+    }
+
+    .feature {
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+
+    .feature:last-child {
+        margin-bottom: 0;
+    } */
+}
