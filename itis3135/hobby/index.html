@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Home Labbing &amp; Open Source — a deep dive into self-hosting, networking, and building in the open.">
+    <title>Home Labbing &amp; Open Source</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png">
+    
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-deep: #050505;
+            --bg-surface: #111111;
+            --bg-card: #1a1a1a;
+            --accent: #00e676;
+            --accent-dim: #00a854;
+            --heading: #ffffff;
+            --text: #e0e0e0;
+            --text-muted: #888888;
+            --border: #2a2a2a;
+            --border-hover: #444444;
+            --radius: 6px;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-dim);
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-deep);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+        }
+
+        header .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--heading);
+            letter-spacing: -0.02em;
+        }
+
+        header h1 span {
+            font-family: 'Fira Code', monospace;
+            font-weight: 400;
+            font-size: 0.85em;
+            color: var(--accent);
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius);
+            position: relative;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--accent);
+            background: rgba(0, 230, 118, 0.08);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 1px;
+        }
+
+        nav .divider {
+            color: var(--border);
+            font-size: 0.7rem;
+            user-select: none;
+            padding: 0 0.15rem;
+        }
+
+        /* ===== MAIN ===== */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 4rem;
+            width: 100%;
+        }
+
+        section {
+            display: none;
+        }
+
+        section.visible {
+            display: block;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: var(--heading);
+            letter-spacing: -0.03em;
+            border-left: 4px solid var(--accent);
+            padding-left: 0.75rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin: 1.5rem 0 0.75rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--heading);
+            text-decoration: underline;
+        }
+
+        /* ===== CARDS / CONTENT BLOCKS ===== */
+        .content-block {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-block:hover {
+            border-color: var(--border-hover);
+        }
+
+        /* ===== LISTS ===== */
+        ul,
+        ol {
+            margin: 0.5rem 0 1rem 1.5rem;
+            color: var(--text);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        li::marker {
+            color: var(--accent);
+        }
+
+        /* ===== TABLES ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.5rem;
+            font-size: 0.92rem;
+        }
+
+        thead th {
+            background: var(--bg-card);
+            color: var(--accent);
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.06em;
+            border-bottom: 2px solid var(--accent-dim);
+        }
+
+        thead th:first-child {
+            border-radius: var(--radius) 0 0 0;
+        }
+
+        thead th:last-child {
+            border-radius: 0 var(--radius) 0 0;
+        }
+
+        tbody td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr:hover {
+            background: var(--bg-card);
+        }
+
+        /* ===== FIGURES ===== */
+        figure {
+            margin: 2rem 0;
+            background: var(--bg-surface);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        figure:hover {
+            border-color: var(--border-hover);
+        }
+
+        figure img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            max-height: 420px;
+        }
+
+        figcaption {
+            padding: 1rem 1.25rem 0.25rem;
+            font-weight: 600;
+            color: var(--heading);
+            font-size: 0.95rem;
+        }
+
+        figure .ai-prompt {
+            padding: 0.25rem 1.25rem 1rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* ===== FEATURE GRID ===== */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-dim);
+        }
+
+        .feature-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .feature-card h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* ===== TAGS / BADGES ===== */
+        .tag {
+            display: inline-block;
+            background: var(--bg-card);
+            color: var(--accent);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            margin: 0.15rem 0.25rem 0.15rem 0;
+                }
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem; /* Added a bit more breathing room */
+            text-align: center;
+        }
+
+        footer .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Rubric item: "designed by" p tag right above the buttons */
+        footer .firm {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem; /* Pushes the buttons below it */
+        }
+
+        footer .firm a {
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        footer .firm a:hover {
+            text-decoration: underline;
+        }
+
+        /* Container for stylized text buttons */
+        footer .validation-links {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        /* Stylized text "buttons" as per rubric */
+        footer .v-btn {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            background: var(--bg-deep);
+        }
+
+        footer .v-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(0, 230, 118, 0.05);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header .header-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            main {
+                padding: 1.5rem 1rem 3rem;
+            }
+
+            figure img {
+                max-height: 260px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="header-inner">
+            <h1><span>&gt;_</span> Home Labbing</h1>
+            <nav id="main-nav">
+                <a href="#what" class="nav-link active" data-section="what">Home</a>
+                <span class="divider">◈</span>
+                <a href="#who" class="nav-link" data-section="who">Who</a>
+                <span class="divider">◈</span>
+                <a href="#when" class="nav-link" data-section="when">When</a>
+                <span class="divider">◈</span>
+                <a href="#where" class="nav-link" data-section="where">Where</a>
+                <span class="divider">◈</span>
+                <a href="#how" class="nav-link" data-section="how">How</a>
+                <span class="divider">◈</span>
+                <a href="#why" class="nav-link" data-section="why">Why</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== MAIN ===== -->
+    <main>
+
+        <!-- ========== WHAT (HOME) ========== -->
+        <section id="what" class="visible">
+            <h2>What Is Home Labbing?</h2>
+
+            <div class="content-block">
+                <p>
+                    Home labbing is the hobby of setting up your own servers and networking gear at home.
+                    It’s a way to take control of your data and learn IT skills without needing a
+                    professional server room.
+                </p>
+                <p>
+                    My setup runs simple but useful tools, things like personal cloud storage,
+                    home automation, and network security. If there’s a service I use daily,
+                    I try to see if I can host it myself first.
+                </p>
+                <p>
+                    It’s mostly a "learn by doing" project. It’s about the satisfaction of
+                    building something from scratch, troubleshooting the weird bugs that
+                    pop up, and finally getting everything to work correctly.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="icon">🖥️</span>
+                    <h4>Self-Hosting</h4>
+                    <p>Run your own email, cloud storage, password manager, and more — no third-party lock-in.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🔒</span>
+                    <h4>Security Research</h4>
+                    <p>Spin up honeypots, IDS/IPS systems, and VPN tunnels to understand threats hands-on.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🧪</span>
+                    <h4>Experimentation</h4>
+                    <p>Test bleeding-edge software, new Linux distros, and container orchestration without risk to
+                        production.</p>
+                </div>
+            </div>
+
+            <figure>
+                <img src="images/homelab_hero.png" alt="A home server lab with glowing blue LEDs and organized cabling">
+                <figcaption>The Heart of the Lab — Rack-Mounted &amp; Ready</figcaption>
+                <p class="ai-prompt">
+                    <em>AI Prompt: "A wide-angle photograph of a home server lab setup in a dimly lit room. Multiple
+                        rack-mounted servers with glowing blue and cyan LED lights, organized ethernet cables, network
+                        switches, and a small monitor displaying a terminal dashboard. Cyberpunk-inspired cool blue and
+                        magenta ambient lighting. High quality, editorial photography style."</em>
+                </p>
+            </figure>
+        </section>
+
+        <!-- ========== WHO ========== -->
+        <section id="who">
+            <h2>Who Are Home Labbers?</h2>
+
+            <div class="content-block">
+                <p>
+                    The home lab community is a mix of students, IT professionals, and hobbyists.
+                    Whether someone is learning for a future career or just tinkering as a
+                    nighttime project, everyone is just trying to figure out how technology
+                    works under the hood.
+                </p>
+                <p>
+                    It’s a very helpful group. Communities like
+                    <a href="https://reddit.com/r/homelab">r/homelab</a> have over a million
+                    members who share configurations and help each other troubleshoot technical
+                    issues at all hours of the night.
+                </p>
+                <p>
+                    At the end of the day, we’re the kind of people who see an old piece of
+                    office hardware at a thrift store or e-waste bin and think about how we
+                    could repurpose it for something cool at home.
+                </p>
+            </div>
+
+            <h3>Community Skill Spectrum</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Typical Setup</th>
+                        <th>Favorite Tool</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Beginner</td>
+                        <td>Raspberry Pi, old laptop</td>
+                        <td>Pi-hole, Portainer</td>
+                    </tr>
+                    <tr>
+                        <td>Intermediate</td>
+                        <td>Mini PC cluster, managed switch</td>
+                        <td>Proxmox, Ansible</td>
+                    </tr>
+                    <tr>
+                        <td>Advanced</td>
+                        <td>Full rack, 10GbE, redundant storage</td>
+                        <td>Kubernetes, Terraform</td>
+                    </tr>
+                    <tr>
+                        <td>Architect</td>
+                        <td>Multi-site, BGP peering, own ASN</td>
+                        <td>Custom tooling, eBPF</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="content-block">
+                <h3>The Cable Management Obsession</h3>
+                <p>
+                    Ask any home labber what they're most proud of, and chances are it's their cable management.
+                    Custom-length patch cables, Velcro wraps, labeled runs, it's part engineering, part art, and
+                    entirely satisfying.
+                </p>
+            </div>
+            <figure>
+                <img src="images/homelab_person.png"
+                    alt="A tech enthusiast working on a Raspberry Pi at a neon-lit desk">
+                <figcaption>The Tinkerer — Where Every Project Starts</figcaption>
+                <p class="ai-prompt">
+                    <em>AI Prompt: "Portrait-style photo of an enthusiastic tech hobbyist sitting at a desk surrounded
+                        by Raspberry Pi boards, hard drives, and networking equipment. Warm neon lighting from monitors
+                        in
+                        the background. Cyberpunk-inspired color palette with cyan and magenta tones. Editorial
+                        photography."</em>
+                </p>
+            </figure>
+        </section>
+
+        <!-- ========== WHEN ========== -->
+        <section id="when">
+            <h2>When Did Home Labbing Start?</h2>
+
+            <div class="content-block">
+                <p>
+                    Home labbing has roots stretching back to the early days of personal computing. In the 1990s,
+                    enthusiasts ran mail servers on ISDN lines and compiled Linux kernels from tarballs downloaded
+                    overnight. The movement was niche, expensive, and gloriously chaotic.
+                </p>
+                <p>
+                    The 2010s brought a revolution: cheap single-board computers like the Raspberry Pi, the rise of
+                    Docker and container technology, and an explosion of free, open-source software that turned a
+                    $35 credit-card-sized computer into a legitimate server. Suddenly, everyone could have a lab.
+                </p>
+                <p>
+                    Today, we live in the golden age. Off-lease enterprise hardware is dirt cheap, virtualization is
+                    mature, and infrastructure-as-code means you can version-control your entire lab setup in Git.
+                </p>
+            </div>
+
+            <h3>A Brief Timeline</h3>
+            <ul>
+                <li><strong>1990s</strong> — Early adopters run LAMP stacks on repurposed desktops. FTP servers and IRC
+                    bots abound.</li>
+                <li><strong>2000s</strong> — VMware Workstation and VirtualBox enable multi-OS experimentation on a
+                    single machine.</li>
+                <li><strong>2012</strong> — Raspberry Pi launches; the barrier to entry drops to the cost of a pizza.
+                </li>
+                <li><strong>2013–2015</strong> — Docker explodes; home labs become containerized micro-datacenters.</li>
+                <li><strong>2017–2020</strong> — Kubernetes at home becomes real with K3s; GitOps enters the hobbyist
+                    lexicon.</li>
+                <li><strong>2021–Present</strong> — Proxmox, TrueNAS, and Tailscale make enterprise-grade setups
+                    trivially accessible.</li>
+            </ul>
+
+            <div class="content-block">
+                <h3>The Off-Lease Gold Rush</h3>
+                <p>
+                    One of the biggest catalysts was the flood of decommissioned enterprise hardware hitting the
+                    secondary market. Dell PowerEdge R720s, HP ProLiant DL380s, machines that once cost $15,000+
+                    now sell for under $200. This democratized serious computing power for hobbyists worldwide.
+                </p>
+            </div>
+
+            <figure>
+                <img src="images/homelab_timeline.png"
+                    alt="Isometric timeline showing the evolution of home computing technology">
+                <figcaption>From Beige Boxes to Blinky Racks — A Visual History</figcaption>
+                <p class="ai-prompt">
+                    <em>AI Prompt: "An isometric illustration of a timeline showing the evolution of home computing and
+                        server technology from the 1990s to 2020s. Each era shows miniaturized server rooms getting
+                        progressively smaller and more powerful. Dark background with neon cyan and magenta accent
+                        colors,
+                        clean vector art style."</em>
+                </p>
+            </figure>
+        </section>
+
+        <!-- ========== WHERE ========== -->
+        <section id="where">
+            <h2>Where Do We Lab?</h2>
+
+            <div class="content-block">
+                <p>
+                    Anywhere with power and an ethernet drop, or even just Wi-Fi. The classic home lab lives in a
+                    spare bedroom closet, a garage shelf, or a purpose-built network rack tucked under the stairs.
+                    Some of us have dedicated rooms; others run the entire operation from a single NUC on the desk.
+                </p>
+                <p>
+                    Location matters because of heat, noise, and power. A full 42U rack with dual Xeon servers can
+                    sound like a jet engine and heat a room by 10°F. Smart labbers plan for ventilation, power
+                    distribution, and UPS backup from day one.
+                </p>
+                <p>
+                    Increasingly, home labs extend into the cloud. Hybrid setups connect on-premises hardware to
+                    cloud VMs via WireGuard or Tailscale tunnels, giving labbers the best of both worlds: local
+                    performance and cloud reach.
+                </p>
+            </div>
+
+            <h3>Common Lab Locations</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Spare Closet</td>
+                        <td>Out of sight, contained</td>
+                        <td>Poor ventilation, limited space</td>
+                    </tr>
+                    <tr>
+                        <td>Garage / Basement</td>
+                        <td>Space, noise isolation</td>
+                        <td>Temperature extremes, dust</td>
+                    </tr>
+                    <tr>
+                        <td>Desktop Mini-Lab</td>
+                        <td>Quiet, energy-efficient</td>
+                        <td>Limited expansion</td>
+                    </tr>
+                    <tr>
+                        <td>Hybrid (On-Prem + Cloud)</td>
+                        <td>Flexibility, redundancy</td>
+                        <td>Monthly cloud costs</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="content-block">
+                <h3>Open Source Champions</h3>
+                <p>
+                    Many home labbers are also prolific open-source contributors. We package our Ansible playbooks,
+                    Docker Compose stacks, and Terraform modules for the community. If we solved a problem, we want
+                    you to never have to fight the same battle.
+                </p>
+            </div>
+            <figure>
+                <img src="images/homelab_space.png"
+                    alt="Organized home office with server rack and monitoring dashboards">
+                <figcaption>A Perfectly Organized Lab — Goals Achieved</figcaption>
+                <p class="ai-prompt">
+                    <em>AI Prompt: "A beautifully organized home office and server closet with a network rack, cable
+                        management, UPS backup, and a desk with multiple monitors showing Grafana dashboards and Proxmox
+                        virtual machines. Neon ambient lighting with cyan and purple tones. High-quality interior
+                        photography."</em>
+                </p>
+            </figure>
+        </section>
+
+        <!-- ========== HOW ========== -->
+        <section id="how">
+            <h2>How Is It All Built?</h2>
+
+            <div class="content-block">
+                <p>
+                    A modern home lab is built in layers, much like a production environment. At the base is the
+                    physical infrastructure, servers, switches, and storage. On top of that sits the hypervisor
+                    (Proxmox, ESXi, or even just KVM), which carves the hardware into virtual machines and containers.
+                </p>
+                <p>
+                    Configuration management tools like Ansible and Terraform ensure that every VM, container, and
+                    network rule is defined as code, versioned in Git, and reproducible. If the lab burns down tomorrow,
+                    we can rebuild it from a repo.
+                </p>
+                <p>
+                    Monitoring is non-negotiable. A typical stack includes Prometheus for metrics collection, Grafana
+                    for dashboards, Loki for log aggregation, and Uptime Kuma for service health checks. If something
+                    goes down at 3 AM, we know about it before the coffee is brewed.
+                </p>
+            </div>
+
+            <h3>The Typical Stack</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="icon">⚙️</span>
+                    <h4>Hypervisor</h4>
+                    <p>Proxmox VE, ESXi, or XCP-ng, the foundation that makes everything else possible.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🐳</span>
+                    <h4>Containers</h4>
+                    <p>Docker, Podman, and K3s for lightweight, reproducible service deployments.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📊</span>
+                    <h4>Monitoring</h4>
+                    <p>Prometheus + Grafana + Loki for complete observability across every layer.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🛡️</span>
+                    <h4>Networking</h4>
+                    <p>OPNsense or pfSense firewall, VLANs, WireGuard VPN, and Pi-hole DNS filtering.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">💾</span>
+                    <h4>Storage</h4>
+                    <p>TrueNAS with ZFS, mirrored pools, snapshots, and replication for data safety.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🤖</span>
+                    <h4>Automation</h4>
+                    <p>Ansible playbooks and Terraform modules, all tracked in Git for full reproducibility.</p>
+                </div>
+            </div>
+
+            <figure>
+                <img src="images/homelab_architecture.png"
+                    alt="Network architecture diagram showing home lab components">
+                <figcaption>The Architecture</figcaption>
+                <p class="ai-prompt">
+                    <em>AI Prompt: "A detailed infographic-style illustration showing the architecture of a home lab
+                        network:
+                        firewall, router, switches, VLANs, NAS storage, hypervisor, Docker containers, and a monitoring
+                        stack.
+                        Dark navy background with glowing cyan connection lines and magenta accent nodes. Clean, modern
+                        technical diagram style."</em>
+                </p>
+            </figure>
+        </section>
+
+        <!-- ========== WHY ========== -->
+        <section id="why">
+            <h2>Why Do We Do This?</h2>
+
+            <div class="content-block">
+                <p>
+                    Because learning by reading documentation is one thing, but <strong>learning by destroying your DNS
+                        at 2 AM and having to fix it</strong> is another level entirely. Home labbing provides a safe
+                    sandbox
+                    where mistakes are cheap and the lessons are permanent.
+                </p>
+                <p>
+                    Every certification we study for, CCNA, CKA, AWS Solutions Architect, becomes tangible when we
+                    can lab it out on real hardware. Theory becomes muscle memory. Diagrams become running systems.
+                </p>
+                <p>
+                    And then there's the open-source angle. We believe that knowledge should be free and tools should
+                    be accessible. When we build something useful, a monitoring template, a backup script, a network
+                    diagram generator, we publish it. We write the README. We answer the issues. We build in the open.
+                </p>
+            </div>
+
+            <h3>The Core Motivations</h3>
+            <ol>
+                <li><strong>Career Acceleration</strong> — Hands-on experience with production-grade tools makes
+                    interviews and on-the-job work dramatically easier.</li>
+                <li><strong>Digital Sovereignty</strong> — We own our data. Our email, our files, our passwords, no
+                    third-party has the keys.</li>
+                <li><strong>Community Impact</strong> — Every open-source contribution, blog post, and forum answer
+                    makes the next person's journey smoother.</li>
+                <li><strong>Pure Joy</strong> — There is a deep, incomparable satisfaction in watching green LEDs blink
+                    in sync on a cluster you built from scratch.</li>
+            </ol>
+
+            <div class="content-block">
+                <h3>Open Source: The Ethos</h3>
+                <p>
+                    We don't just use open-source software, we live by open-source principles. Transparency,
+                    collaboration, and giving back are baked into the culture. Our dotfiles are public. Our
+                    Ansible roles are on GitHub. Our blog posts include the mistakes, not just the victories.
+                </p>
+                <div style="margin-top: 1rem;">
+                    <span class="tag">Linux</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">Kubernetes</span>
+                    <span class="tag">Ansible</span>
+                    <span class="tag">Terraform</span>
+                    <span class="tag">Proxmox</span>
+                    <span class="tag">ZFS</span>
+                    <span class="tag">WireGuard</span>
+                    <span class="tag">Grafana</span>
+                    <span class="tag">Pi-hole</span>
+                </div>
+            </div>
+
+            <figure>
+                <img src="images/homelab_community.png"
+                    alt="Open-source community meetup with developers collaborating">
+                <figcaption>Building in the Open — Together</figcaption>
+                <p class="ai-prompt">
+                    <em>AI Prompt: "An inspiring wide shot of an open-source community meetup, with laptops open showing
+                        GitHub repositories and code. A large screen in the background displays a pull request being
+                        merged.
+                        Warm atmosphere with ambient cyan and magenta lighting. Documentary photography style, diverse
+                        group
+                        of developers collaborating."</em>
+                </p>
+            </figure>
+        </section>
+
+    </main>
+    <footer>
+        
+       
+    <div class="validation-links">
+            <a href="https://validator.w3.org/check?uri=referer" class="v-btn">HTML5</a>
+            <a href="https://jigsaw.w3.org/css-validator/check/referer" class="v-btn">CSS3</a>
+            <a href="https://wave.webaim.org/report#/https://webpages.charlotte.edu/sbrigant/itis3135/hobby" class="v-btn">WCAG</a>
+        </div> 
+          <p>Page designed by <a href="../seanbdesigns.com/index.html">Sean B Designs</a> | Certified Super Beaver
+        Architect &copy; 2026</p>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main > section');
+
+            function showSection(targetId) {
+                // Hide all sections
+                sections.forEach(function (s) { s.classList.remove('visible'); });
+                // Show target
+                var target = document.getElementById(targetId);
+                if (target) { target.classList.add('visible'); }
+
+                // Update active nav link
+                navLinks.forEach(function (link) {
+                    link.classList.toggle('active', link.dataset.section === targetId);
+                });
+            }
+
+            // Click handler for nav
+            navLinks.forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showSection(this.dataset.section);
+                    // Update URL hash without scrolling
+                    history.replaceState(null, '', '#' + this.dataset.section);
+                });
+            });
+
+            // Handle direct URL with hash
+            var hash = window.location.hash.replace('#', '');
+            if (hash && document.getElementById(hash)) {
+                showSection(hash);
+            } else {
+                showSection('what');
+            }
+        })();
+    </script>
+
+</body>
+
+</html>
