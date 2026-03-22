@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sean D. Briganti | Introduction Form</title>
+    <link rel="stylesheet" href="styles/intro_form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+    <div data-include="components/header.html"></div>
+
+    <main>
+        <h2>Introduction Form</h2>
+
+        <form id="intro-form" novalidate>
+            <!-- Name Fields -->
+            <fieldset>
+                <legend>Name</legend>
+                <div class="inline-fields">
+                    <div>
+                        <label for="first-name" class="required-star">First Name</label>
+                        <input type="text" id="first-name" name="firstName" value="Sean" placeholder="Enter first name" required>
+                    </div>
+                    <div>
+                        <label for="middle-name">Middle Name/Initial</label>
+                        <input type="text" id="middle-name" name="middleName" value="D." placeholder="Enter middle name">
+                    </div>
+                    <div>
+                        <label for="last-name" class="required-star">Last Name</label>
+                        <input type="text" id="last-name" name="lastName" value="Briganti" placeholder="Enter last name" required>
+                    </div>
+                    <div>
+                        <label for="nickname">Nickname</label>
+                        <input type="text" id="nickname" name="nickname" value="" placeholder="Enter nickname (optional)">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Acknowledgment -->
+            <fieldset>
+                <legend>Acknowledgment</legend>
+                <label for="acknowledge-statement" class="required-star">Acknowledgment Statement</label>
+                <input type="text" id="acknowledge-statement" name="acknowledgeStatement" value="I acknowledge that the information provided is accurate to the best of my knowledge." placeholder="Enter acknowledgment statement" required>
+                <label for="acknowledge-date" class="required-star">Date</label>
+                <input type="date" id="acknowledge-date" name="acknowledgeDate" value="2026-03-22" required>
+            </fieldset>
+
+            <!-- Mascot -->
+            <fieldset>
+                <legend>Mascot</legend>
+                <div class="inline-fields">
+                    <div>
+                        <label for="mascot-adjective" class="required-star">Adjective</label>
+                        <input type="text" id="mascot-adjective" name="mascotAdjective" value="Super" placeholder="e.g. Super, Mighty" required>
+                    </div>
+                    <div>
+                        <label for="mascot-animal" class="required-star">Animal</label>
+                        <input type="text" id="mascot-animal" name="mascotAnimal" value="Beaver" placeholder="e.g. Beaver, Eagle" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Image -->
+            <fieldset>
+                <legend>Image</legend>
+                <label for="image-file" class="required-star">Image File</label>
+                <input type="file" id="image-file" name="imageFile" accept="image/*" required>
+                <label for="image-alt" class="required-star">Image Alt Text</label>
+                <input type="text" id="image-alt" name="imageAlt" value="Beaver holding a stick in its mouth" placeholder="Describe the image" required>
+                <label for="image-caption" class="required-star">Image Caption</label>
+                <input type="text" id="image-caption" name="imageCaption" value="Beaver holding a stick - my personal brand mascot." placeholder="Caption for the image" required>
+            </fieldset>
+
+            <!-- Personal Statement -->
+            <fieldset>
+                <legend>Personal Statement</legend>
+                <label for="personal-statement" class="required-star">Statement</label>
+                <textarea id="personal-statement" name="personalStatement" placeholder="Write your personal introduction statement" required>I'm a junior at UNC Charlotte studying Computer Science with a concentration in Cybersecurity. I'm excited to build complex webpages this semester.</textarea>
+            </fieldset>
+
+            <!-- Main Bullets -->
+            <fieldset>
+                <legend>Main Bullets (7 Alignment)</legend>
+
+                <label for="bullet1-title" class="required-star">Bullet 1 Title</label>
+                <input type="text" id="bullet1-title" name="bullet1Title" value="Personal Background:" placeholder="e.g. Personal Background:" required>
+                <label for="bullet1-text" class="required-star">Bullet 1 Text</label>
+                <input type="text" id="bullet1-text" name="bullet1Text" value="I'm 18 years old and I enjoy math and going to the gym." required>
+
+                <label for="bullet2-title" class="required-star">Bullet 2 Title</label>
+                <input type="text" id="bullet2-title" name="bullet2Title" value="Professional Background:" placeholder="e.g. Professional Background:" required>
+                <label for="bullet2-text" class="required-star">Bullet 2 Text</label>
+                <input type="text" id="bullet2-text" name="bullet2Text" value="I have multiple offers for interning in spring, summer, and fall, ranging from offensive security to Go programming." required>
+
+                <label for="bullet3-title" class="required-star">Bullet 3 Title</label>
+                <input type="text" id="bullet3-title" name="bullet3Title" value="Academic Background:" placeholder="e.g. Academic Background:" required>
+                <label for="bullet3-text" class="required-star">Bullet 3 Text</label>
+                <input type="text" id="bullet3-text" name="bullet3Text" value="I completed high school simultaneously with an associate degree." required>
+
+                <label for="bullet4-title" class="required-star">Bullet 4 Title (Computer Platform)</label>
+                <input type="text" id="bullet4-title" name="bullet4Title" value="Primary Computer Platform:" required>
+                <label for="bullet4-text" class="required-star">Bullet 4 Text</label>
+                <input type="text" id="bullet4-text" name="bullet4Text" value="Windows" required>
+
+                <label for="courses-title" class="required-star">Bullet 5 Title (Courses)</label>
+                <input type="text" id="courses-title" name="coursesTitle" value="Courses I'm Taking:" required>
+
+                <label for="bullet6-title">Bullet 6 Title (Funny thing) - Optional</label>
+                <input type="text" id="bullet6-title" name="bullet6Title" value="Funny thing:" placeholder="...">
+                <label for="bullet6-text">Bullet 6 Text - Optional</label>
+                <input type="text" id="bullet6-text" name="bullet6Text" value="I have weirdly flexible shoulders." placeholder="Something funny">
+
+                <label for="bullet7-title">Bullet 7 Title (Something to share) - Optional</label>
+                <input type="text" id="bullet7-title" name="bullet7Title" value="Something I would like to share:" placeholder="...">
+                <label for="bullet7-text">Bullet 7 Text - Optional</label>
+                <input type="text" id="bullet7-text" name="bullet7Text" value="Can't wait to work with everyone." placeholder="Share something">
+            </fieldset>
+
+            <!-- Dynamic Courses -->
+            <fieldset>
+                <legend>Courses Tracker (Bullet 5 Sub-list)</legend>
+                <div id="courses-container">
+                    <div class="course-entry" data-index="1">
+                        <div>
+                            <label>Dept</label>
+                            <input type="text" name="courseDept1" value="Math" placeholder="e.g. ITIS" required>
+                        </div>
+                        <div>
+                            <label>Number</label>
+                            <input type="text" name="courseNum1" value="2165" placeholder="e.g. 3135" required>
+                        </div>
+                        <div>
+                            <label>Name</label>
+                            <input type="text" name="courseName1" value="" placeholder="Course name (optional)">
+                        </div>
+                        <div>
+                            <label>Reason</label>
+                            <input type="text" name="courseReason1" value="Required, and I love math." placeholder="Why you're taking it" required>
+                        </div>
+                    </div>
+                    <div class="course-entry" data-index="2">
+                        <div>
+                            <label>Dept</label>
+                            <input type="text" name="courseDept2" value="ITIS" placeholder="e.g. ITIS" required>
+                        </div>
+                        <div>
+                            <label>Number</label>
+                            <input type="text" name="courseNum2" value="3135" placeholder="e.g. 3135" required>
+                        </div>
+                        <div>
+                            <label>Name</label>
+                            <input type="text" name="courseName2" value="" placeholder="Course name (optional)">
+                        </div>
+                        <div>
+                            <label>Reason</label>
+                            <input type="text" name="courseReason2" value="Front-End development is vital for the field." placeholder="Why you're taking it" required>
+                        </div>
+                    </div>
+                    <div class="course-entry" data-index="3">
+                        <div>
+                            <label>Dept</label>
+                            <input type="text" name="courseDept3" value="ITSC" placeholder="e.g. ITIS" required>
+                        </div>
+                        <div>
+                            <label>Number</label>
+                            <input type="text" name="courseNum3" value="2181" placeholder="e.g. 3135" required>
+                        </div>
+                        <div>
+                            <label>Name</label>
+                            <input type="text" name="courseName3" value="" placeholder="Course name (optional)">
+                        </div>
+                        <div>
+                            <label>Reason</label>
+                            <input type="text" name="courseReason3" value='Understanding computers "under the hood."' placeholder="Why you're taking it" required>
+                        </div>
+                    </div>
+                    <div class="course-entry" data-index="4">
+                        <div>
+                            <label>Dept</label>
+                            <input type="text" name="courseDept4" value="ITIS" placeholder="e.g. ITIS" required>
+                        </div>
+                        <div>
+                            <label>Number</label>
+                            <input type="text" name="courseNum4" value="3200" placeholder="e.g. 3135" required>
+                        </div>
+                        <div>
+                            <label>Name</label>
+                            <input type="text" name="courseName4" value="" placeholder="Course name (optional)">
+                        </div>
+                        <div>
+                            <label>Reason</label>
+                            <input type="text" name="courseReason4" value="Most relevant for my Cybersecurity focus." placeholder="Why you're taking it" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-row">
+                    <button type="button" id="add-course-btn" class="btn-secondary btn-small">+ Add Course</button>
+                    <button type="button" id="delete-course-btn" class="btn-danger btn-small">− Delete Last Course</button>
+                </div>
+            </fieldset>
+
+            <!-- Quote -->
+            <fieldset>
+                <legend>Quote</legend>
+                <label for="quote-text" class="required-star">Quote</label>
+                <input type="text" id="quote-text" name="quoteText" value="The happiness of your life depends upon the quality of your thoughts." placeholder="Enter a quote" required>
+                <label for="quote-author" class="required-star">Author</label>
+                <input type="text" id="quote-author" name="quoteAuthor" value="Marcus Aurelius" placeholder="Author of the quote" required>
+            </fieldset>
+
+            <!-- Links -->
+            <fieldset>
+                <legend>Links</legend>
+                <label for="link-github" class="required-star">GitHub URL</label>
+                <input type="url" id="link-github" name="linkGithub" value="https://github.com/SeanB35" placeholder="https://github.com/..." required>
+                <label for="link-charlotte" class="required-star">Charlotte Web URL</label>
+                <input type="url" id="link-charlotte" name="linkCharlotte" value="https://webpages.charlotte.edu/sbrigant" placeholder="https://webpages.charlotte.edu/..." required>
+                <label for="link-ghpages" class="required-star">GitHub Pages URL</label>
+                <input type="url" id="link-ghpages" name="linkGhPages" value="https://seanb35.github.io/" placeholder="https://username.github.io/" required>
+                <label for="link-freecodecamp" class="required-star">freeCodeCamp URL</label>
+                <input type="url" id="link-freecodecamp" name="linkFreeCodeCamp" value="https://www.freecodecamp.org/sbrigant" placeholder="https://www.freecodecamp.org/..." required>
+                <label for="link-linkedin" class="required-star">LinkedIn URL</label>
+                <input type="url" id="link-linkedin" name="linkLinkedin" value="https://www.linkedin.com/in/sean-briganti/" placeholder="https://www.linkedin.com/in/..." required>
+            </fieldset>
+
+            <!-- Buttons -->
+            <div class="btn-row">
+                <button type="submit" class="btn-primary">Submit</button>
+                <input type="reset" value="Reset">
+                <button type="button" id="clear-btn" class="btn-secondary">Clear</button>
+            </div>
+        </form>
+
+    </main>
+    <div id="output"></div>
+
+    <div data-include="components/footer.html"></div>
+
+    <script src="scripts/introduction.js"></script>
+    <script src="scripts/generate_html.js"></script>
+    <script src="scripts/generate_json.js"></script>
+    <script src="scripts/HTMLInclude.min.js"></script>
+
+
+</body>
+</html>
