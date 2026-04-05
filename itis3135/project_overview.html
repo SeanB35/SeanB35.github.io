@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Overview - Photography Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="styles/default.css">
+
+</head>
+<body>
+
+    <header>
+        <h1>Requirements & Design Proposal: Photography Portfolio</h1>
+        <p><strong>Developer:</strong> Sean Briganti | <strong>Date:</strong> April 5, 2026</p>
+    </header>
+
+    <main>
+        <section id="project-overview">
+            <h2>Project Overview</h2>
+            <ul>
+                <li><strong>Application Description:</strong> A professional, read-only portfolio website for a freelance photographer. The site will establish an online presence, showcase their work with a distinct cinematic and gritty aesthetic, and provide a streamlined way for potential clients to view rates and get in touch.</li>
+                <li><strong>Intended Users:</strong> The general public, photography lovers, and potential clients looking to book photoshoots.</li>
+                <li><strong>Content Overview:</strong> High-resolution photography galleries, professional biography, service packages/pricing, and contact information.</li>
+            </ul>
+        </section>
+
+        <section id="client-info">
+            <h2>Client Information</h2>
+            <ul>
+                <li><strong>Name:</strong> [Private - Cousin]</li>
+                <li><strong>Organization:</strong> Freelance Photography</li>
+                <li><strong>Email:</strong> [Private]</li>
+                <li><strong>Phone:</strong> [Private]</li>
+            </ul>
+        </section>
+
+        <section id="diagrams">
+            <h2>Wireframe & Site Map</h2>
+            
+            <h3>Default Page Wireframe</h3>
+            <p>Below is the wireframe outlining the default structural layout, prioritizing dark-mode aesthetics to complement gritty photography.</p>
+            <figure>
+                <img src="images/wireframe.png" alt="Wireframe of the default page layout">
+                <figcaption><a href="images/wireframe.png" target="_blank">View Full Size Wireframe</a></figcaption>
+            </figure>
+
+            <h3>Site Map</h3>
+            <p>Hierarchical map detailing the 5-page navigation structure.</p>
+            <figure>
+                <img src="images/sitemap.png" alt="Site Map showing 5 distinct pages">
+                <figcaption><a href="images/sitemap.png" target="_blank">View Full Size Site Map</a></figcaption>
+            </figure>
+        </section>
+
+        <section id="page-design">
+            <h2>Page Design Details</h2>
+
+            <div class="page-design">
+                <h3>1. Home Page (index.html)</h3>
+                <ul>
+                    <li><strong>Purpose:</strong> Landing page to immediately capture attention with the photographer's best cinematic shot.</li>
+                    <li><strong>Audience:</strong> General public, potential clients.</li>
+                    <li><strong>Content:</strong> Hero image banner, brief welcome text, call-to-action button linking to the portfolio.</li>
+                    <li><strong>Data Entry:</strong> None.</li>
+                    <li><strong>Actions:</strong> Button click navigates to `portfolio.html`.</li>
+                </ul>
+            </div>
+
+            <div class="page-design">
+                <h3>2. Portfolio Gallery (portfolio.html)</h3>
+                <ul>
+                    <li><strong>Purpose:</strong> To showcase the photographer's body of work in high resolution.</li>
+                    <li><strong>Audience:</strong> Photography lovers, potential clients.</li>
+                    <li><strong>Content:</strong> Grid of thumbnail images.</li>
+                    <li><strong>Data Entry:</strong> None.</li>
+                    <li><strong>Actions:</strong> Clicking a thumbnail opens an interactive JavaScript lightbox/carousel to view the image full-screen.</li>
+                </ul>
+            </div>
+
+            <div class="page-design">
+                <h3>3. Services & Rates (services.html)</h3>
+                <ul>
+                    <li><strong>Purpose:</strong> Provide details on photoshoot packages and pricing.</li>
+                    <li><strong>Audience:</strong> Potential clients.</li>
+                    <li><strong>Content:</strong> Text descriptions of packages (e.g., Portrait, Event, Street Photography).</li>
+                    <li><strong>Data Entry:</strong> None.</li>
+                    <li><strong>Actions:</strong> Uses a jQuery-UI Accordion. Users click on a package header to expand and reveal the pricing details below it.</li>
+                </ul>
+            </div>
+
+            <div class="page-design">
+                <h3>4. About the Artist (about.html)</h3>
+                <ul>
+                    <li><strong>Purpose:</strong> Background information on the photographer and their artistic philosophy.</li>
+                    <li><strong>Audience:</strong> General public.</li>
+                    <li><strong>Content:</strong> Portrait of the photographer, biography text, and a section for client testimonials.</li>
+                    <li><strong>Data Entry:</strong> None.</li>
+                    <li><strong>Actions:</strong> Page load triggers an AJAX call to load testimonial data from a local JSON file into the DOM.</li>
+                </ul>
+            </div>
+
+            <div class="page-design">
+                <h3>5. Contact & Booking (contact.html)</h3>
+                <ul>
+                    <li><strong>Purpose:</strong> Allow users to inquire about booking a shoot.</li>
+                    <li><strong>Audience:</strong> Potential clients.</li>
+                    <li><strong>Content:</strong> Contact form and social media links.</li>
+                    <li><strong>Data Entry:</strong> Yes. Form fields: Name, Email, Type of Shoot (Dropdown), Date, Message.</li>
+                    <li><strong>Validation:</strong> JavaScript validation to ensure Email is formatted correctly and Name/Message are not blank before simulating a submission.</li>
+                    <li><strong>Actions:</strong> Clicking "Submit" triggers validation. If successful, displays a "Message Sent" alert (read-only mockup, no backend database routing).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="dynamic-functionality">
+            <h2>Dynamic Functionality</h2>
+            <ul>
+                <li><strong>JavaScript Interactivity (Lightbox Gallery):</strong> Located on `portfolio.html`. When a user clicks a photo thumbnail, a dark, immersive overlay appears showing the full-size image with "Next" and "Previous" navigation. This enhances the gritty, cinematic viewing experience. <em>Inspiration: https://fancyapps.com/fancybox/</em></li>
+                <li><strong>jQuery-UI Widget (Accordion):</strong> Located on `services.html`. To prevent overwhelming the user with text, the photography packages will be hidden inside an accordion. Clicking a header expands the text. <em>Inspiration: https://jqueryui.com/accordion/</em></li>
+                <li><strong>AJAX Functionality (Testimonial Loader):</strong> Located on `about.html`. I will use the JavaScript `fetch()` API (AJAX) to request a local `reviews.json` file containing static client feedback. This data will be dynamically injected into the HTML without reloading the page, fulfilling the AJAX requirement while adhering to the read-only (No CRUD) constraint.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <hr>
+        <p>
+            <a href="https://validator.w3.org/" target="_blank">Validate HTML</a> | 
+            <a href="https://jigsaw.w3.org/css-validator/" target="_blank">Validate CSS</a>
+        </p>
+    </footer>
+
+</body>
+</html>
