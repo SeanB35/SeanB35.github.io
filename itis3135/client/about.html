@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about the artist behind the lens — biography, philosophy, and client testimonials.">
+    <title>About — Peter Bivona Photography</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="site-nav" id="site-nav">
+        <div class="container">
+            <a href="index.html" class="nav-logo">Bivona<span>.</span></a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html">Home</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="services.html">Services</a>
+                <a href="about.html" class="active">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="nav-spacer"></div>
+
+    <!-- ====== ABOUT ====== -->
+    <main class="section">
+        <h1 class="section-title">About the Artist</h1>
+        <p class="section-subtitle">The story behind the lens.</p>
+        <div class="section-divider"></div>
+
+        <div class="container">
+            <div class="about-grid">
+
+
+
+                <!-- Bio -->
+                <div class="about-bio">
+                    <h2>A Life in Frames</h2>
+                    <p>Peter Bivona is a cinematic photographer based out of Charlotte, NC, whose work blurs the line between raw documentary and high-contrast drama. He picked up his first camera as a teenager and quickly became obsessed with chasing light through the grittiest corners of the city.</p>
+                    <p>His portfolio spans street photography, portraiture, and editorial work — all unified by a signature aesthetic: deep shadows, weathered textures, and an unflinching honesty that strips away artifice. Peter's images don't pose. They confront.</p>
+                    <p>When he's not behind the lens, Peter is scouting urban locations, studying classic film noir cinematography, or collaborating with local artists and musicians on visual projects that push boundaries.</p>
+                    <p class="signature">— Peter Bivona</p>
+                </div>
+
+            </div>
+
+            <!-- Testimonials (loaded via AJAX) -->
+            <section class="testimonials">
+                <h2 class="section-title">What Clients Say</h2>
+                <div class="section-divider"></div>
+                <div class="testimonial-grid" id="testimonial-grid">
+                    <!-- Testimonials injected here by script.js -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="https://validator.w3.org/" target="_blank">Validate HTML</a>
+            <a href="https://jigsaw.w3.org/css-validator/" target="_blank">Validate CSS</a>
+        </div>
+        <p>&copy; 2026 Peter Bivona Photography | Designed &amp; Developed by Sean Briganti</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

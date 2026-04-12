@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse the cinematic photography portfolio — street, portrait, landscape, and editorial work.">
+    <title>Portfolio — Peter Bivona Photography</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="site-nav" id="site-nav">
+        <div class="container">
+            <a href="index.html" class="nav-logo">Bivona<span>.</span></a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html">Home</a>
+                <a href="portfolio.html" class="active">Portfolio</a>
+                <a href="services.html">Services</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="nav-spacer"></div>
+
+    <!-- ====== GALLERY ====== -->
+    <main class="section">
+        <h1 class="section-title">The Work</h1>
+        <p class="section-subtitle">A curated collection of cinematic moments.</p>
+        <div class="section-divider"></div>
+
+        <div class="container">
+            <div class="gallery-grid" id="gallery-grid">
+
+                <div class="gallery-item" data-index="0">
+                    <img src="images/DSC06165.webp" alt="Portrait in golden hour light">
+                    <div class="overlay"><span>Western Coast</span></div>
+                </div>
+
+                <div class="gallery-item" data-index="1">
+                    <img src=images/DSC06009.webp alt="Urban street at night with neon reflections">
+                    <div class="overlay"><span>Golden Hour</span></div>
+                </div>
+
+                <div class="gallery-item" data-index="2">
+                    <img src="images/traintracks.webp" alt="Misty forest landscape">
+                    <div class="overlay"><span>Urban Train</span></div>
+                </div>
+
+                <div class="gallery-item" data-index="3">
+                    <img src=images/DSC09751-Edit-2-Edit.webp alt="Close-up editorial portrait">
+                    <div class="overlay"><span>Grassy Mountain</span></div>
+                </div>
+
+                <div class="gallery-item" data-index="4">
+                    <img src="images/stars.webp" alt="Moody cityscape at dusk">
+                    <div class="overlay"><span>Night Sky</span></div>
+                </div>
+
+                <div class="gallery-item" data-index="5">
+                    <img src="images/house.webp" alt="Silhouette against dramatic sky">
+                    <div class="overlay"><span>Log Cabin</span></div>
+                </div>
+
+                <div class="gallery-item" data-index="6">
+                    <img src="images/river.webp" alt="Motion blur in urban environment">
+                    <div class="overlay"><span>River</span></div>
+                </div>
+
+                <div class="gallery-item" data-index="7">
+                    <img src="images/lake.webp" alt="Environmental portrait in gritty alley">
+                    <div class="overlay"><span>Snowy Landscap</span></div>
+                </div>
+
+                <div class="gallery-item" data-index="8">
+                    <img src="images/mountain.webp" alt="Wide landscape with dramatic clouds">
+                    <div class="overlay"><span>Mountain</span></div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ====== LIGHTBOX ====== -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+        <img src="" alt="Full-size photograph" id="lightbox-img">
+        <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next image">&#8250;</button>
+    </div>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="https://validator.w3.org/" target="_blank">Validate HTML</a>
+            <a href="https://jigsaw.w3.org/css-validator/" target="_blank">Validate CSS</a>
+        </div>
+        <p>&copy; 2026 Peter Bivona Photography | Designed &amp; Developed by Sean Briganti</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
