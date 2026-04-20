@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Beaver | Tail-Slap Synth</title>
+    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../styles/js_cert.css">
+    <style>
+        #pad-bank {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .drum-pad {
+            height: 80px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            transition: all 0.1s;
+        }
+
+        .drum-pad:active,
+        .drum-pad.active {
+            transform: scale(0.95);
+            background-color: var(--text-primary);
+            color: #000;
+        }
+
+        #display {
+            background: #111;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            min-height: 1.5rem;
+            color: #0f0;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Super Beaver's Secure Lodge</h1>
+        <div data-include="header.html"></div>
+
+    </header>
+
+    <main>
+        <h2>Tail-Slap Communications</h2>
+
+        <div class="app-container" id="drum-machine">
+            <div id="pad-bank"></div>
+            <p id="display">AWAITING INPUT...</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Super Beaver Operations. All systems secure.</p>
+    </footer>
+
+    <script>
+        // Themed audio data mapping
+        const audioData = [
+            { key: 'Q', name: 'Tail Slap 1', src: 'Heater-1.mp3' },
+            { key: 'W', name: 'Tail Slap 2', src: 'Heater-2.mp3' },
+            { key: 'E', name: 'Tail Slap 3', src: 'Heater-3.mp3' },
+            { key: 'A', name: 'Tail Slap 4', src: 'Heater-4_1.mp3' },
+            { key: 'S', name: 'Wood Gnaw', src: 'Heater-6.mp3' },
+            { key: 'D', name: 'Water Splash', src: 'Dsc_Oh.mp3' },
+            { key: 'Z', name: 'Tree Fall', src: 'Kick_n_Hat.mp3' },
+            { key: 'X', name: 'Heavy Log', src: 'RP4_KICK_1.mp3' },
+            { key: 'C', name: 'River Ripple', src: 'Cev_H2.mp3' }
+        ];
+
+        const padBank = document.getElementById('pad-bank');
+        const display = document.getElementById('display');
+        const baseURL = 'https://cdn.freecodecamp.org/curriculum/drum/';
+
+        // Initialize Pads
+        audioData.forEach(item => {
+            const btn = document.createElement('button');
+            btn.className = 'drum-pad';
+            btn.id = item.name.replace(/\s+/g, '-');
+            btn.innerText = item.key;
+
+            const audio = document.createElement('audio');
+            audio.className = 'clip';
+            audio.id = item.key;
+            audio.src = baseURL + item.src;
+
+            btn.appendChild(audio);
+            padBank.appendChild(btn);
+        });
+
+        const playSound = (key, name) => {
+            const audio = document.getElementById(key);
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play();
+                display.innerText = "SIGNAL: " + name;
+
+                // Visual feedback for keystrokes
+                const pad = audio.parentElement;
+                pad.classList.add('active');
+                setTimeout(() => pad.classList.remove('active'), 100);
+            }
+        };
+
+        padBank.addEventListener('click', (e) => {
+            const pad = e.target.closest('.drum-pad');
+            if (pad) {
+                const audio = pad.querySelector('.clip');
+                playSound(audio.id, pad.id.replace(/-/g, ' '));
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toUpperCase();
+            const audio = document.getElementById(key);
+            if (audio) {
+                const pad = audio.parentElement;
+                playSound(key, pad.id.replace(/-/g, ' '));
+            }
+        });
+    </script>
+    <div data-include="footer.html"></div>
+    <script src="../scripts/HTMLInclude.min.js"></script>
+</body>
+
+</html>

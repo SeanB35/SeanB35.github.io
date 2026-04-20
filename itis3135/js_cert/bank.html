@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Beaver | Timber Reserve</title>
+    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../styles/js_cert.css">
+</head>
+
+<body>
+    <header>
+        <h1>Super Beaver's Secure Lodge</h1>
+        <div data-include="../components/header.html"></div>
+
+    </header>
+
+    <main>
+        <h2>Timber Reserve System</h2>
+
+        <div class="app-container">
+            <p>Current Timber Balance: <strong id="balance-display">0 Logs</strong></p>
+
+            <input type="number" id="amount-input" placeholder="Enter log amount..." min="1">
+
+            <button onclick="handleDeposit()">Deposit Logs</button>
+            <button onclick="handleWithdraw()">Withdraw Logs</button>
+
+            <p id="transaction-message"></p>
+        </div>
+
+        <script>
+            /* BankAccount class — manages the timber reserve balance */
+            class BankAccount {
+                constructor() {
+                    this.balance = 0;
+                }
+
+                deposit(amount) {
+                    if (isNaN(amount) || amount <= 0) {
+                        return "Error: Please enter a valid positive number.";
+                    }
+                    this.balance += amount;
+                    return `Successfully deposited ${amount} logs.`;
+                }
+
+                withdraw(amount) {
+                    if (isNaN(amount) || amount <= 0) {
+                        return "Error: Please enter a valid positive number.";
+                    }
+                    if (amount > this.balance) {
+                        return `Error: Insufficient timber! You only have ${this.balance} logs.`;
+                    }
+                    this.balance -= amount;
+                    return `Successfully withdrew ${amount} logs.`;
+                }
+            }
+
+            const lodgeReserve = new BankAccount();
+            const balanceDisplay = document.getElementById('balance-display');
+            const msgDisplay = document.getElementById('transaction-message');
+            const amountInput = document.getElementById('amount-input');
+
+            function updateUI(msg) {
+                balanceDisplay.innerText = lodgeReserve.balance + " Logs";
+                msgDisplay.innerText = msg;
+                amountInput.value = '';
+            }
+
+            function handleDeposit() {
+                const val = parseFloat(amountInput.value);
+                const msg = lodgeReserve.deposit(val);
+                updateUI(msg);
+            }
+
+            function handleWithdraw() {
+                const val = parseFloat(amountInput.value);
+                const msg = lodgeReserve.withdraw(val);
+                updateUI(msg);
+            }
+        </script>
+        <script src="../scripts/HTMLInclude.min.js"></script>
+
+    </main>
+    <div data-include="../components/footer.html"></div>
+    <script src="../scripts/HTMLInclude.min.js"></script>
+    <footer>
+        <p>&copy; 2026 Super Beaver Operations. All systems secure.</p>
+    </footer>
+</body>
+
+</html>

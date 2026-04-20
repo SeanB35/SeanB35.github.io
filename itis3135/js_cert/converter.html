@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Beaver | Blueprint Converter</title>
+    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../styles/js_cert.css">
+    <style>
+        .converter-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+
+        @media(min-width: 768px) {
+            .converter-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .preview-section {
+                grid-column: span 2;
+            }
+        }
+
+        textarea,
+        .output-box {
+            width: 100%;
+            height: 200px;
+            background: #111;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .output-box {
+            font-family: 'Segoe UI', sans-serif;
+            background: #222;
+        }
+
+        h3 {
+            margin-bottom: 5px;
+            color: var(--accent-blue);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Super Beaver's Secure Lodge</h1>
+        <div data-include="header.html"></div>
+
+    </header>
+
+    <main>
+        <h2>Dam Blueprint Generator</h2>
+
+        <div class="app-container" style="max-width: 800px;">
+            <div class="converter-grid">
+                <div>
+                    <h3>Raw Schematics (Markdown)</h3>
+                    <textarea id="markdown-input"
+                        placeholder="# Dam Construction Phase 1&#10;&#10;**Materials Needed:**&#10;* Heavy Timber&#10;* Mud Sealant"></textarea>
+                </div>
+                <div>
+                    <h3>Compiled Code (HTML)</h3>
+                    <div id="html-output" class="output-box" style="font-family: monospace; white-space: pre-wrap;">
+                    </div>
+                </div>
+                <div class="preview-section">
+                    <h3>Final Blueprint Preview</h3>
+                    <div id="preview" class="output-box"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Super Beaver Operations. All systems secure.</p>
+    </footer>
+
+    <script>
+        const input = document.getElementById('markdown-input');
+        const htmlOutput = document.getElementById('html-output');
+        const preview = document.getElementById('preview');
+
+        function convertMarkdown() {
+            const rawText = input.value;
+            const lines = rawText.split('\n');
+
+            const processedLines = lines.map(line => {
+                let processed = line;
+
+                // Headings
+                processed = processed.replace(/^### (.*)$/, '<h3>$1</h3>');
+                processed = processed.replace(/^## (.*)$/, '<h2>$1</h2>');
+                processed = processed.replace(/^# (.*)$/, '<h1>$1</h1>');
+
+                // Blockquotes
+                processed = processed.replace(/^> (.*)$/, '<blockquote>$1</blockquote>');
+
+                // Bold
+                processed = processed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                processed = processed.replace(/__(.*?)__/g, '<strong>$1</strong>');
+
+                // Italic
+                processed = processed.replace(/\*(.*?)\*/g, '<em>$1</em>');
+                processed = processed.replace(/_(.*?)_/g, '<em>$1</em>');
+
+                // Images
+                processed = processed.replace(/!\[(.*?)\]\((.*?)\)/g, '<img alt="$1" src="$2" style="max-width:100%;">');
+
+                // Links
+                processed = processed.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" style="color: #6EAAFF;">$1</a>');
+
+                return processed;
+            });
+
+            return processedLines.join('\n');
+        }
+
+        function updateDisplays() {
+            const htmlResult = convertMarkdown();
+            htmlOutput.innerText = htmlResult; // Shows raw tags
+            preview.innerHTML = htmlResult;    // Renders the tags
+        }
+
+        // Run once on load to render the placeholder
+        updateDisplays();
+
+        // Listen for changes
+        input.addEventListener('input', updateDisplays);
+    </script>
+    <div data-include="footer.html"></div>
+    <script src="../scripts/HTMLInclude.min.js"></script>
+</body>
+
+</html>

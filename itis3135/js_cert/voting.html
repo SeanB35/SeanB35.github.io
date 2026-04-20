@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Beaver | Protocol Voting</title>
+    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../styles/js_cert.css">
+</head>
+
+<body>
+    <header>
+        <h1>Super Beaver's Secure Lodge</h1>
+        <div data-include="header.html"></div>
+
+    </header>
+
+    <main>
+        <h2>Protocol Voting Station</h2>
+
+        <div class="app-container">
+            <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #555;">
+                <h3>Propose New Location</h3>
+                <input type="text" id="new-option" placeholder="e.g., North River Bend">
+                <button onclick="handleAddOption()">Add Protocol</button>
+            </div>
+
+            <div>
+                <h3>Cast Protocol Vote</h3>
+                <input type="text" id="voter-id" placeholder="Enter Beaver ID (e.g., BVR-001)">
+                <select id="vote-select">
+                    <option value="">Select a location...</option>
+                </select>
+                <button onclick="handleVote()">Submit Vote</button>
+            </div>
+
+            <p id="voting-message"></p>
+            <pre id="results-display"
+                style="background: #111; padding: 10px; color: #fff; border-radius: 4px; white-space: pre-wrap;"></pre>
+        </div>
+
+        <script>
+            /* Voting logic using Map and Set */
+            const poll = new Map();
+            const allVoters = new Set();
+
+            function addOption(optionName) {
+                const trimmed = optionName.trim();
+                if (!trimmed) {
+                    return "Error: Option name cannot be empty.";
+                }
+                if (poll.has(trimmed)) {
+                    return `Error: "${trimmed}" already exists.`;
+                }
+                poll.set(trimmed, new Set());
+                return `"${trimmed}" added as a voting option.`;
+            }
+
+            function vote(optionName, voterId) {
+                const trimmedVoter = voterId.trim();
+                if (!poll.has(optionName)) {
+                    return "Error: That option does not exist.";
+                }
+                if (allVoters.has(trimmedVoter)) {
+                    return `Error: Beaver ${trimmedVoter} has already voted!`;
+                }
+                poll.get(optionName).add(trimmedVoter);
+                allVoters.add(trimmedVoter);
+                return `Beaver ${trimmedVoter} voted for "${optionName}".`;
+            }
+
+            function displayResults() {
+                let output = "=== VOTING RESULTS ===\n";
+                for (const [option, voters] of poll) {
+                    output += `\n${option}: ${voters.size} vote(s)`;
+                    if (voters.size > 0) {
+                        output += `\n  Voters: ${[...voters].join(", ")}`;
+                    }
+                }
+                return output;
+            }
+
+            const voteSelect = document.getElementById('vote-select');
+            const msgDisplay = document.getElementById('voting-message');
+            const resultsDisplay = document.getElementById('results-display');
+
+            function updateDropdown() {
+                voteSelect.innerHTML = '<option value="">Select a location...</option>';
+                for (const [option, voters] of poll) {
+                    voteSelect.innerHTML += `<option value="${option}">${option}</option>`;
+                }
+                resultsDisplay.innerText = displayResults();
+            }
+
+            function handleAddOption() {
+                const input = document.getElementById('new-option');
+                const msg = addOption(input.value);
+                msgDisplay.innerText = msg;
+                input.value = '';
+                updateDropdown();
+            }
+
+            function handleVote() {
+                const voter = document.getElementById('voter-id').value;
+                const option = voteSelect.value;
+                if (!voter || !option) {
+                    msgDisplay.innerText = "Error: Must provide Beaver ID and select an option.";
+                    return;
+                }
+                const msg = vote(option, voter);
+                msgDisplay.innerText = msg;
+                updateDropdown();
+            }
+
+            // Initialize with theme defaults
+            addOption("North River Bend");
+            addOption("Main Spillway");
+            updateDropdown();
+        </script>
+    </main>
+    <div data-include="footer.html"></div>
+    <script src="../scripts/HTMLInclude.min.js"></script>
+    <footer>
+        <p>&copy; 2026 Super Beaver Operations. All systems secure.</p>
+    </footer>
+</body>
+
+</html>
