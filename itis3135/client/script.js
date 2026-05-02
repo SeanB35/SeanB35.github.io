@@ -11,7 +11,7 @@
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initNavToggle();
+    loadComponents();
     initLightbox();
     initTestimonials();
     initAccordion();
@@ -19,8 +19,32 @@ document.addEventListener('DOMContentLoaded', () => {
     initGalleryFilter();
     initBeforeAfter();
     initScrollReveal();
-    initBackToTop();
 });
+
+function loadComponents() {
+    fetch('components/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+            initNavToggle();
+            let currentPath = window.location.pathname.split('/').pop();
+            if (currentPath === '') currentPath = 'index.html';
+            let navLinks = document.querySelectorAll('#nav-links a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+    fetch('components/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+            initBackToTop();
+        });
+}
 
 /* ----------------------------------------------------------
    1. MOBILE NAV TOGGLE
@@ -53,6 +77,7 @@ function initNavToggle() {
                 via buttons and arrow keys, and closes on Escape
                 or backdrop click.
    ---------------------------------------------------------- */
+// Source citation: Basic DOM manipulation for Modal UI patterns
 function initLightbox() {
     const grid     = document.getElementById('gallery-grid');
     const lightbox = document.getElementById('lightbox');
@@ -303,6 +328,7 @@ function initGalleryFilter() {
                 the handle to compare two versions of a photo.
                 Uses clip-path to dynamically crop the top layer.
    ============================================================== */
+// Source citation: Custom draggable implementation inspired by standard JS mouse events.
 function initBeforeAfter() {
     const wrapper = document.getElementById('ba-wrapper');
     if (!wrapper) return;
@@ -354,6 +380,7 @@ function initBeforeAfter() {
        Clicking it smoothly scrolls to the top of the page.
    ============================================================== */
 
+// Source citation: MDN Intersection Observer API
 function initScrollReveal() {
     const reveals = document.querySelectorAll('.reveal');
     if (!reveals.length) return;

@@ -637,3 +637,7 @@ body::after {
 .reveal.revealed { opacity: 1; transform: translateY(0); }
 .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); cursor: pointer; opacity: 0; pointer-events: none; transition: 0.4s; z-index: 999; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
 .back-to-top.visible { opacity: 1; pointer-events: auto; }
+
+
+/* Added during audit */
+.hero-bg { background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&q=80'); }
